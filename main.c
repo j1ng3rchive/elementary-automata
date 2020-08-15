@@ -79,6 +79,22 @@ unsigned long findMaxCycleLength(char rule, char length) {
 }
 
 int main(int argc, char* argv[]) {
+	int rules[] = {
+		18,//0
+		22,//1
+		26,//2
+		30,//3
+		45,//4
+		60,//5
+		73,//6
+		105,//7
+		110,//8
+		122,//9
+		126,//10
+		146,//11
+		150,//12
+		154//13
+	};
 	char* type = argc > 1 ? argv[1] : "single";
 	char length = argc > 2 ? atoi(argv[2]) : 4;
 	char rule = argc > 3 ? atoi(argv[3]) : 110;
@@ -108,7 +124,8 @@ int main(int argc, char* argv[]) {
 		for(int i = 3; i <= length; i++) {
 			char maxRule = 0;
 			unsigned long maxLength = 0;
-			for(char ruleIndex = 0;; ruleIndex++) {
+			for(int j = 0; j < 14; j++) {
+				char ruleIndex = rules[j];
 				unsigned long cycleLength = findMaxCycleLength(ruleIndex, i);
 				if(cycleLength > maxLength) {
 					maxLength = cycleLength;
@@ -119,7 +136,7 @@ int main(int argc, char* argv[]) {
 					break;
 				}
 			}
-			printf("%d, %d\n", maxLength, maxRule);
+			printf("%d, %d      \n", maxLength, maxRule);
 		}
 		printf("Done.\n");
 	} else {
